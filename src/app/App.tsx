@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Route, useLocation } from 'react-router-dom';
 
 import Layout from './layout';
+
+import Home from './pages/home';
+import LibraryInfo from './pages/library-info';
 
 import './App.scss';
 
@@ -14,7 +17,8 @@ const App: React.FC = () => {
 
   return (
     <Layout>
-      <div>Hello</div>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/libraries/library/:id' component={LibraryInfo} />
     </Layout>
   );
 };

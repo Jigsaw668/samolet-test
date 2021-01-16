@@ -186,7 +186,7 @@ module.exports = env => {
 
       new HtmlWebpackPlugin({
         inject: true,
-        template: path.resolve(__dirname, './public/index.html'),
+        template: path.resolve(__dirname, 'src/html/index.html'),
       }),
 
       new FontPreloadPlugin(),
@@ -218,14 +218,14 @@ module.exports = env => {
 
       new CopyPlugin({
         patterns: [
-          { from: path.resolve(__dirname, './public/favicon.ico'), to: path.resolve(__dirname, 'build') },
-          { from: path.resolve(__dirname, './public/manifest.json'), to: path.resolve(__dirname, 'build') },
+          { from: path.resolve(__dirname, 'src/html/favicon.ico'), to: path.resolve(__dirname, 'build') },
+          { from: path.resolve(__dirname, 'src/html/manifest.json'), to: path.resolve(__dirname, 'build') },
         ],
       }),
     ],
 
     devServer: mode === 'development' ? {
-      contentBase: path.join(__dirname, './public'),
+      contentBase: path.join(__dirname, 'src/html'),
       publicPath: '/',
       compress: true,
       port: 3000,
@@ -239,6 +239,13 @@ module.exports = env => {
       headers: {
         'Cache-Control': 'public, max-age=6048000, immutable',
       },
+      proxy: {
+        '/opendata/': {
+          target: 'https://data.gov.ru/sites/default/files',
+          changeOrigin: true,
+          secure: false,
+        },
+      },
     } : {},
 
     target: 'web',
@@ -247,8 +254,8 @@ module.exports = env => {
 
     performance: {
       hints: 'error',
-      maxEntrypointSize: 10000000,
-      maxAssetSize: 10000000,
+      maxEntrypointSize: 20000000,
+      maxAssetSize: 20000000,
     },
   };
 };

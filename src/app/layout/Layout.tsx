@@ -1,21 +1,20 @@
-import Header from './header';
-import Footer from './footer';
+import { Layout as AntLayout } from 'antd';
+import { NavLink } from 'react-router-dom';
 
 import './Layout.scss';
+
+const { Content, Sider } = AntLayout;
 
 const Layout: React.FC = props => {
   const { children } = props;
 
   return (
-    <>
-      <Header />
-      <div className='layout'>
-        <div className='layout-wrapper'>
-          {children}
-        </div>
-      </div>
-      <Footer />
-    </>
+    <AntLayout>
+      <Sider>
+        <NavLink to='/'>Главная</NavLink>
+      </Sider>
+      <Content>{children}</Content>
+    </AntLayout>
   );
 };
 

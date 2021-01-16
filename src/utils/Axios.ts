@@ -7,7 +7,7 @@ Axios.interceptors.request.use(
     // eslint-disable-next-line no-param-reassign
     config.headers = {
       ...config.headers,
-      Authorization: `Token ${localStorage.getItem('token')}`,
+      // Authorization: `Token ${localStorage.getItem('token')}`,
     };
 
     return config;
